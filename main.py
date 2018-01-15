@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*- 
 # filename: main.py
 
-import checktime
+#import checktime
 
 from sharelist_t import share_list
 import sort_price
@@ -12,7 +12,7 @@ share_list = sort_price.sort_list(share_list)
 share_list = sort_kdj.sort_list(share_list)
 
 from monitor import *
-ma_monitor_start(share_list, last_ma)
+start(share_list, 1)
 
 
 import code
