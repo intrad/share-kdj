@@ -57,7 +57,8 @@ def kdj_monitor(l, debug=0):
 
 # KDJ监视条件
 def kdj_checker(code):
-    kdj = kdj_now(code)
+    kdj = kdj_now(code)[0]
+    #print(code)
     # K大于D
     if kdj[0] >= kdj[1]:
         if code not in buy_list:
