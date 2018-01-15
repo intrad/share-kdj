@@ -26,7 +26,7 @@ def sort_list(l, day=1):
 ########################### 筛选KDJ #############################
 
 def sort_kdj(share_code, day=1):
-    #print('检查 %s K是否低于J' % (share_code, target_price))
+    #print('检查 %s K是否低于J' % (share_code))
     kdj = kdj_now(share_code, day+1)
     if kdj == []:
         li.remove(share_code)
@@ -49,11 +49,11 @@ def sort_kdj_list(l, day=1):
     li = list(l)
     futures = []
     for i in l:
-        futures.append(pool.submit(sort_price, (i, day)))
+        futures.append(pool.submit(sort_kdj, (i, day)))
     wait(futures)
     a = len(l)
     b = len(li)
-    print('移除 %s 支股票J低于K，列表中还剩 %s' % (a-b, target_price, b))
+    print('移除 %s 支股票J低于K，列表中还剩 %s' % (a-b, b))
     return(li)
 
 
@@ -62,8 +62,8 @@ def sort_kdj_list(l, day=1):
 def help():
     print('''
     多线程
-    sort_list(list, price=18, day=10)
-        sort_price_list(list, target_price=18)
-          sort_price()
+    sort_list(list, day=1)
+        sort_kdj_list(list, day=1)
+          sort_kdj()
     help()
     ''')
