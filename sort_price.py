@@ -3,9 +3,10 @@
 # filename: sort_price.py
 
 from datetime import datetime
-from concurrent.futures import ThreadPoolExecutor, wait
+import threading
+#from concurrent.futures import ThreadPoolExecutor, wait
 
-pool = ThreadPoolExecutor(max_workers=20)
+#pool = ThreadPoolExecutor(max_workers=20)
 
 ############PROXY###########
 timeout = 3
@@ -43,10 +44,16 @@ def sort_price_list(l, target_price=18):
     global li
     print('筛选价格中, 一共%s支股票。' % len(l))
     li = list(l)
-    futures = []
+    #futures = []
+    threads = []
     for i in l:
-        futures.append(pool.submit(sort_price, (i, target_price)))
-    wait(futures)
+        a = threading.Thread(target=sort_price, args=(i, target_price))
+        threads.append(a)
+        a.start()
+        #futures.append(pool.submit(sort_price, (i, target_price)))
+    for t in threads:
+        t.join()
+    #wait(futures)
     a = len(l)
     b = len(li)
     print('移除 %s 支股票价格低于%s元，列表中还剩 %s' % (a-b, target_price, b))
