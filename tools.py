@@ -175,6 +175,7 @@ def kdj_now(code, day=1, debug=0):
             i = i + 1
             kdj = source[-i].split('[')[1].split(']')[0].split(',')
             result.append((kdj[0], kdj[1], kdj[2]))
+    #print(result)
     return(result)
 
 
