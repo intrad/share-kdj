@@ -37,7 +37,7 @@ def sort_kdj(share_code, day=1):
             if i[0] > i[1]:
                 li.remove(share_code)
                 print('%s 不符合条件。' % share_code)
-                brake
+                break
             else:
                 pass
         #print('%s 符合条件!' % share_code)
