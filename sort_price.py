@@ -2,9 +2,6 @@
 # -*- coding: UTF-8 -*- 
 # filename: sort_price.py
 
-import requests
-import os
-from bs4 import BeautifulSoup
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, wait
 
