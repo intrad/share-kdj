@@ -17,12 +17,11 @@ def sort_list(l, price=18, day=10):
     start_time = datetime.now()
     a = len(l)
     l1 = sort_price_list(l, price)
-    l2 = sort_ma_list(l1, day)
-    b = len(l2)
+    b = len(l1)
     end_time = datetime.now()
     timedelsta = (end_time - start_time).seconds
     print('过滤掉%s支股票，还剩%s支股票，耗时%s秒。' % (a-b, b, timedelsta))
-    return(l2)
+    return(l1)
 
 ########################### 筛选价格 #############################
 
