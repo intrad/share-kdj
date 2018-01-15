@@ -38,7 +38,7 @@ def kdj_monitor(l, debug=0):
     start_time = datetime.now(timezone('Asia/Shanghai'))
     dead_time = start_time.replace(hour=15, minute=00)
     if debug == 1:
-        dead_time = start_time.replace(hour=11, minute=59)
+        dead_time = start_time.replace(hour=23, minute=59)
     c = 0
     while datetime.now(timezone('Asia/Shanghai')) < dead_time:
         if globals()['monitor_status'] != False:
