@@ -46,7 +46,7 @@ def sort_price_list(l, target_price=18):
     li = list(l)
     futures = []
     for i in l:
-        futures.append(pool.submit(sort_price, (i, target_price))）
+        futures.append(pool.submit(sort_price, (i, target_price)))
     wait(futures)
     a = len(l)
     b = len(li)
