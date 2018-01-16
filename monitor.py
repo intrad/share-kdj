@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*- 
 # filename: monitor.py
 
-client_phone = 8618662059088
+#client_phone = 8618662059088
 
 import sms
 from tools import *
@@ -13,9 +13,10 @@ import os
 import sqlite3
 
 #client_phone = 8615665156520
+client_phone = None
 ##########################################
 # 监视程序
-# 启动关闭MA监视
+# 启动关闭监视
 def start(l, debug=0):
     a = threading.Thread(target=kdj_monitor, args=(l, debug,))
     a.start()
@@ -24,7 +25,7 @@ def stop():
     globals()['monitor_status'] = False
 
 
-# MA监视循环
+# KDJ监视循环
 def kdj_monitor(l, debug=0):
     global buy_list
     global monitor_status
@@ -58,17 +59,21 @@ def kdj_monitor(l, debug=0):
 # KDJ监视条件
 def kdj_checker(code):
     kdj = kdj_now(code)[0]
+    macd = macd_now(code)[0]
+    ma = ma_now(code)[0]
     #print(code)
     # K大于D
     if kdj[0] >= kdj[1]:
-        if code not in buy_list:
-            buy_list.append(code)
-            time_now = datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
-            text = '%s%s(KDJ)交叉提醒 %s' % (share_name(code), code, time_now)
-            sms.send_sms(client_phone, text)
-            sms.send_sms(16267318573, text)
-            print('%s买入时机' % code)
-            insert_ma_data(code, kdj)
+        if macd[3] >= 0:
+            if ma[0] > ma[1] > ma[2]:
+                if code not in buy_list:
+                    buy_list.append(code)
+                    time_now = datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
+                    text = '%s%s(KDJ)交叉提醒 %s' % (share_name(code), code, time_now)
+                    sms.send_sms(client_phone, text)
+                    sms.send_sms(16267318573, text)
+                    print('%s买入时机' % code)
+                    insert_ma_data(code, kdj)
 
 
 # 数据库部分
