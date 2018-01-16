@@ -14,7 +14,7 @@ timeout = 3
 from tools import *
 
 ###多线程筛选
-def sort_list(l, price=18, day=10):
+def sort_list(l, price=18):
     start_time = datetime.now()
     a = len(l)
     l1 = sort_price_list(l, price)
@@ -36,6 +36,7 @@ def sort_price(share_code, target_price=18):
         li.remove(share_code)
         #print('%s 不符合条件。' % share_code)
     else:
+        pass
         #print('%s 符合条件!' % share_code)
 
 
