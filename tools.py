@@ -179,6 +179,39 @@ def kdj_now(code, day=1, debug=0):
     return(result)
 
 
+def macd_now(code, day=1, debug=0):
+    type_url = 'http://suggest.eastmoney.com/SuggestData/Default.aspx?type=1&input=%s' % code
+    type_r = None
+    while type_r == None:
+        try:
+            type_r = s.get(type_url, timeout=timeout)
+        except:
+            pass
+    type = type_r.text.split(',')[-2]
+    today = datetime.now(timezone('Asia/Shanghai'))
+    span = '%s%02d%02d' % (today.year, today.month, today.day)
+    url = 'http://pdfm.eastmoney.com/EM_UBG_PDTI_Fast/api/js?id=%s%s&TYPE=k&QueryStyle=2.2&QuerySpan=%s%%2C%s&extend=macd' % (code, type, span, day)
+    r = None
+    while r == None:
+        try:
+            r = s.get(url, timeout=timeout)
+        except:
+            pass
+    if debug != 0:
+        return r
+    result = []
+    if r.text == '({stats:false})':
+        pass
+    else:
+        source = r.text[1:-3].split('\r\n')
+        for i in range(day):
+            i = i + 1
+            macd = source[-i].split('[')[1].split(']')[0].split(',')
+            result.append((float(macd[0]), float(macd[1]), float(macd[2])))
+    #print(result)
+    return(result)
+
+
 
 # HELP
 
