@@ -64,7 +64,7 @@ def kdj_checker(code):
     #print(code)
     # K大于D
     if kdj[0] >= kdj[1]:
-        if macd[3] >= 0:
+        if macd[2] >= 0:
             if ma[0] > ma[1] > ma[2]:
                 if code not in buy_list:
                     buy_list.append(code)
