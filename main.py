@@ -14,7 +14,7 @@ share_list = sort_price.sort_list(share_list)
 share_list = sort_kdj.sort_list(share_list)
 
 from monitor import *
-start(share_list, 0)
+start(share_list, 1)
 
 
 import code
