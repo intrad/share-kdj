@@ -31,12 +31,12 @@ def sort_price(share_code, target_price=18):
     price = price_now(share_code)[0]
     if price == '':
         li.remove(share_code)
-        print('%s 无法获取价格。' % share_code)
+        #print('%s 无法获取价格。' % share_code)
     elif price > target_price:
         li.remove(share_code)
-        print('%s 不符合条件。' % share_code)
+        #print('%s 不符合条件。' % share_code)
     else:
-        print('%s 符合条件!' % share_code)
+        #print('%s 符合条件!' % share_code)
 
 
 # 多线程筛选价格
