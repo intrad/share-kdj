@@ -2,7 +2,8 @@
 # -*- coding: UTF-8 -*- 
 # filename: monitor.py
 
-#client_phone = 8618662059088
+client_phone = 8618662059088
+client_phone1 = 8613365180783
 
 import sms
 from tools import *
@@ -13,7 +14,7 @@ import os
 import sqlite3
 
 #client_phone = 8615665156520
-client_phone = None
+#client_phone = None
 ##########################################
 # 监视程序
 # 启动关闭监视
@@ -35,6 +36,7 @@ def kdj_monitor(l, debug=0):
     text = '条件：1.前一日K小于D。 筛选出%s支股票，开始扫描。' % len(l)
     print('开始扫描。')
     sms.send_sms(client_phone, text)
+    sms.send_sms(client_phone1, text)
     sms.send_sms(16267318573, text)
     start_time = datetime.now(timezone('Asia/Shanghai'))
     dead_time = start_time.replace(hour=15, minute=00)
@@ -71,6 +73,7 @@ def kdj_checker(code):
                     time_now = datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
                     text = '%s%s(KDJ)交叉提醒 %s' % (share_name(code), code, time_now)
                     sms.send_sms(client_phone, text)
+                    sms.send_sms(client_phone1, text)
                     sms.send_sms(16267318573, text)
                     print('%s买入时机' % code)
                     insert_ma_data(code, kdj)
