@@ -24,7 +24,7 @@ def next_trading_date(debug=0):
     return(next_year, next_month, next_day)
 
 
-def check_time():
+def check_time(hour, minute, second):
     now_time = datetime.now(timezone('Asia/Shanghai')).replace(tzinfo=None)
     # 如果今天工作日
     if 0 <= now_time.weekday() < 5:
@@ -33,7 +33,7 @@ def check_time():
             start_year = now_time.year
             start_month = now_time.month
             start_day = now_time.day
-            start_time = datetime.strptime('%s-%s-%s 09:25:00' % (start_year, start_month, start_day), "%Y-%m-%d %H:%M:%S")
+            start_time = datetime.strptime('%s-%s-%s %02d:%02d:%02d' % (start_year, start_month, start_day, hour, minute, second), "%Y-%m-%d %H:%M:%S")
             sleep_time = (start_time-now_time).total_seconds()
             sleep_day = sleep_time // 86400
             sleep_hour = (sleep_time % 86400) // 3600
@@ -47,7 +47,7 @@ def check_time():
             start_year = next_date[0]
             start_month = next_date[1]
             start_day = next_date[2]
-            start_time = datetime.strptime('%s-%s-%s 09:25:00' % (start_year, start_month, start_day), "%Y-%m-%d %H:%M:%S")
+            start_time = datetime.strptime('%s-%s-%s %02d:%02d:%02d' % (start_year, start_month, start_day, hour, minute, second), "%Y-%m-%d %H:%M:%S")
             sleep_time = (start_time-now_time).total_seconds()
             sleep_day = sleep_time // 86400
             sleep_hour = (sleep_time % 86400) // 3600
@@ -62,7 +62,7 @@ def check_time():
         start_year = next_date[0]
         start_month = next_date[1]
         start_day = next_date[2]
-        start_time = datetime.strptime('%s-%s-%s 09:25:00' % (start_year, start_month, start_day), "%Y-%m-%d %H:%M:%S")
+        start_time = datetime.strptime('%s-%s-%s %02d:%02d:%02d' % (start_year, start_month, start_day, hour, minute, second), "%Y-%m-%d %H:%M:%S")
         sleep_time = (start_time-now_time).total_seconds()
         sleep_day = sleep_time // 86400
         sleep_hour = (sleep_time % 86400) // 3600
@@ -71,5 +71,6 @@ def check_time():
         print('睡眠%d天%d小时%d秒后启动程序' % (sleep_day, sleep_hour, sleep_second))
         time.sleep(sleep_time)
 
-
-check_time()
+def help():
+    print('''
+    check_time(09,30,01)
