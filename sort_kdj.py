@@ -3,6 +3,7 @@
 # filename: sort_kdj.py
 
 from datetime import datetime
+from pytz import timezone
 import threading
 #from concurrent.futures import ThreadPoolExecutor, wait
 
@@ -33,7 +34,10 @@ def sort_kdj(share_code, day=1):
         li.remove(share_code)
         print('%s 无法获取kdj。' % share_code)
     else:
-        kdj.remove(kdj[0])
+        time_now = datetime.now(timezone('Asia/Shanghai'))
+        open_time = time_now.replace(hour=9, minute=30)
+        if time_now > open_time:
+            kdj.remove(kdj[0])
         for i in kdj:
             if i[0] > i[1]:
                 li.remove(share_code)
