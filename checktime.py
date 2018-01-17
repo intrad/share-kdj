@@ -74,3 +74,4 @@ def check_time(hour, minute, second):
 def help():
     print('''
     check_time(09,30,01)
+    ''')
