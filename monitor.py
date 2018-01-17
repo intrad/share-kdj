@@ -33,7 +33,7 @@ def kdj_monitor(l, debug=0):
     globals()['monitor_status'] = True
     buy_list = []
     create_ma_form('KDJ')
-    text = '条件：1.前一日K小于D。 筛选出%s支股票，开始扫描。' % len(l)
+    text = '筛选出%s支股票，开始扫描。 条件：1.KDJ交叉。2.MACD>0。3.MA5>MA10>MA20' % len(l)
     print('开始扫描。')
     sms.send_sms(client_phone, text)
     sms.send_sms(client_phone1, text)
@@ -71,7 +71,7 @@ def kdj_checker(code):
                 if code not in buy_list:
                     buy_list.append(code)
                     time_now = datetime.now(timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
-                    text = '%s%s(KDJ)交叉提醒 %s' % (share_name(code), code, time_now)
+                    text = '%s%s买入提醒 %s' % (share_name(code), code, time_now)
                     sms.send_sms(client_phone, text)
                     sms.send_sms(client_phone1, text)
                     sms.send_sms(16267318573, text)
