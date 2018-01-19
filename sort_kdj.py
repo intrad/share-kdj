@@ -29,15 +29,18 @@ def sort_list(l, day=1):
 
 def sort_kdj(share_code, day=1):
     #print('检查 %s K是否低于J' % (share_code))
-    kdj = kdj_now(share_code, day+1)
+    kdj = kdj_now(share_code, day+2)
     if kdj == []:
         li.remove(share_code)
         print('%s 无法获取kdj。' % share_code)
     else:
         time_now = datetime.now(timezone('Asia/Shanghai'))
         open_time = time_now.replace(hour=9, minute=30)
-        if time_now > open_time:
+        close_time = time_now.replace(hour=15, minute=00)
+        if close_time > time_now > open_time:
             kdj.remove(kdj[0])
+        if kdj[1][2] > kdj[2][2]:
+            li.remove(share_code)
         for i in kdj:
             if i[0] > i[1]:
                 li.remove(share_code)
