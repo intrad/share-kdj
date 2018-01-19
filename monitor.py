@@ -64,9 +64,11 @@ def kdj_checker(code):
     macd = macd_now(code)[0]
     ma = ma_now(code)[0]
     #print(code)
-    # K大于D
+    # 当日K大于D
     if kdj[0] >= kdj[1]:
+        # MACD上涨
         if macd[2] >= 0:
+            # MA5 > MA10 > MA20
             if ma[0] > ma[1] > ma[2]:
                 if code not in buy_list:
                     buy_list.append(code)
