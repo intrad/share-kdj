@@ -39,10 +39,10 @@ def sort_kdj(share_code, day=1):
         close_time = time_now.replace(hour=15, minute=00)
         if close_time > time_now > open_time:
             kdj.remove(kdj[0])
-        if kdj[1][2] > kdj[2][2]:
+        if kdj[0][2] > kdj[1][2]:
             li.remove(share_code)
         for i in kdj:
-            if i[0] > i[1]:
+            if i[0][0] > i[0][1]:
                 li.remove(share_code)
                 print('%s 不符合条件。' % share_code)
                 break
